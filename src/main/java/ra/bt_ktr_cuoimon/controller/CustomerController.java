@@ -4,10 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ra.bt_ktr_cuoimon.model.dto.request.CustomerLogin;
 import ra.bt_ktr_cuoimon.model.dto.request.CustomerRegister;
 import ra.bt_ktr_cuoimon.model.dto.response.APIResponse;
@@ -34,5 +31,11 @@ public class CustomerController {
         return new ResponseEntity<>(
             new APIResponse<>
                 (true, "Đăng nhập tài khoản thành công!", customerService.login(customerLogin), HttpStatus.OK), HttpStatus.OK);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(@RequestHeader("Authorization") String token) {
+        customerService.logout(token);
+        return ResponseEntity.ok("Logout thành công và token đã bị thu hồi!");
     }
 }

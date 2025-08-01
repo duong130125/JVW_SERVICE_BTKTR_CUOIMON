@@ -13,6 +13,8 @@ import java.util.List;
 public class CustomerRegister {
     @NotBlank(message = "Tên đăng nhập không được để trống")
     private String username;
+    @NotBlank(message = "Mật khẩu không được để trống")
+    @Size(min = 6, message = "Mật khẩu phải có ít nhất 6 ký tự")
     private String password;
     @NotBlank(message = "Họ và tên không được để trống")
     private String fullName;
